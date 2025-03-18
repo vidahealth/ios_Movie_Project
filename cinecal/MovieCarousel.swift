@@ -35,7 +35,7 @@ class MovieCarouselViewController: UIViewController, UICollectionViewDelegate, U
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 20
-        layout.itemSize = CGSize(width: view.bounds.width * 0.6, height: view.bounds.height * 0.9)
+        layout.itemSize = CGSize(width: view.bounds.width * 0.7, height: view.bounds.height * 0.9)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
@@ -88,6 +88,7 @@ class MovieCarouselViewController: UIViewController, UICollectionViewDelegate, U
 
 class MovieCell: UICollectionViewCell {
     private let imageView = UIImageView()
+    private static let imageCache = NSCache<NSURL, UIImage>()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,6 +97,11 @@ class MovieCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil // Prevents image duplication
     }
     
     private func setupView() {
@@ -115,17 +121,26 @@ class MovieCell: UICollectionViewCell {
     
     func configure(with movie: Movie) {
         if let url = movie.imageURL {
-            downloadImage(from: url)
+            loadImage(from: url)
         }
     }
     
-    private func downloadImage(from url: URL) {
-        DispatchQueue.global().async {
-            if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.imageView.image = image
-                }
+    private func loadImage(from url: URL) {
+        if let cachedImage = MovieCell.imageCache.object(forKey: url as NSURL) {
+            imageView.image = cachedImage
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self, let data = data, let image = UIImage(data: data) else { return }
+            
+            // Cache the image
+            MovieCell.imageCache.setObject(image, forKey: url as NSURL)
+            
+            DispatchQueue.main.async {
+                self.imageView.image = image
             }
         }
+        task.resume()
     }
 }

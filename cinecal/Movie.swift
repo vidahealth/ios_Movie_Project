@@ -77,7 +77,7 @@ struct Movie {
             description: "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal, and other historical events unfold through the perspective of an Alabama man with an IQ of 75.",
             runtime: 142,
             showtime: Calendar.current.date(byAdding: .day, value: 3, to: Date())!,
-            imageURL: "https://image.tmdb.org/t/p/w300_and_h450_bestv2/yE5d3BUhE8hCnkMUJOo1QDoOGNz.jpg"
+            imageURL: "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg"
         ),
         Movie(
             title: "Gladiator",
