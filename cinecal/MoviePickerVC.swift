@@ -8,6 +8,8 @@
 import UIKit
 
 class MoviePickerVC: UIViewController {
+    private var movieCarouselVC: MovieCarouselViewController!
+    private let movies = Movie.movies
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,25 +19,31 @@ class MoviePickerVC: UIViewController {
     private func setupLayout() {
         view.backgroundColor = .white
         
-        let topBox = createBox(withText: "Movie Carousel - Implement a carousel of movies here")
+        movieCarouselVC = MovieCarouselViewController(movies: movies)
+        movieCarouselVC.delegate = self
+        
+        addChild(movieCarouselVC)
+        view.addSubview(movieCarouselVC.view)
+        
+        movieCarouselVC.view.translatesAutoresizingMaskIntoConstraints = false
+        movieCarouselVC.didMove(toParent: self)
+        
         let middleBox = createBox(withText: "Movie Details - Show details of the selected movie here")
         let bottomBox = createBox(withText: "Book Prompt - Open calendar add view here")
         
-        view.addSubview(topBox)
         view.addSubview(middleBox)
         view.addSubview(bottomBox)
         
-        topBox.translatesAutoresizingMaskIntoConstraints = false
         middleBox.translatesAutoresizingMaskIntoConstraints = false
         bottomBox.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            topBox.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            topBox.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topBox.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topBox.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/3),
+            movieCarouselVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            movieCarouselVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            movieCarouselVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            movieCarouselVC.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/3),
             
-            middleBox.topAnchor.constraint(equalTo: topBox.bottomAnchor),
+            middleBox.topAnchor.constraint(equalTo: movieCarouselVC.view.bottomAnchor),
             middleBox.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             middleBox.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             middleBox.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/3),
@@ -67,5 +75,11 @@ class MoviePickerVC: UIViewController {
         ])
         
         return container
+    }
+}
+
+extension MoviePickerVC: MovieCarouselDelegate {
+    func didFocusOnMovie(_ movie: Movie) {
+        // Add your logic here
     }
 }
