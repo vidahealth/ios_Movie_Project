@@ -9,3 +9,6 @@ You will display Title, Duration and Time
 
 2. - Implement book button.
 On clicking this button, a calendar sheet should appear, making a calendar event for the given movie at the specified time.
+
+3. - Add any finishing touches.
+Think something could be improved or changed? Feel free to get creative
