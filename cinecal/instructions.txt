@@ -1,8 +1,8 @@
 Welcome to CineCal, a movie app with only 10 movies!
 
-This is a SwiftUI app, but you will be dealing mainly with MoviePickerVC, a UIViewController
+This is a SwiftUI app, but you will be dealing mainly with MoviePickerVC, a UIViewController.
+Open MoviePickerVC and implement the following tasks below:
 
-Your tasks are as follows:
 
 1. - Implement movie details using the focused movie provided by MovieCarouselDelegate.
 You will display Title, Duration and Time
