@@ -1,14 +1,37 @@
-Welcome to CineCal, a movie app with only 10 movies!
+# Welcome to CineCal - The movie app with only 10 movies.
 
-This is a SwiftUI app, but you will be dealing mainly with MoviePickerVC, a UIViewController.
-Open MoviePickerVC and implement the following tasks below:
+## Overview
+- CineCal is a simple movie booking application that displays a carousel of movies.
+- Your task is to complete the movie details view and booking functionality in `MoviePickerVC`.
 
+## Project Structure
+- The app uses UIKit with a SwiftUI wrapper for the main view. (Gives you a live preview in ContentView)
+- MoviePickerVC contains three main sections:
+  1. Top: Movie carousel (already implemented)
+  2. Middle: Movie details section (to be implemented)
+  3. Bottom: Booking section (to be implemented)
 
-1. - Implement movie details using the focused movie provided by MovieCarouselDelegate.
-You will display Title, Duration and Time
+## Tasks
 
-2. - Implement book button.
-On clicking this button, a calendar sheet should appear, making a calendar event for the given movie at the specified time.
+1. Movie Details Implementation
+   - The MovieCarouselDelegate will provide you with the currently selected movie
+   - In the middle section, display:
+     - Movie title
+     - Runtime (in "X hr Y min" format)
+     - Showtime (Display in readable format)
+     - Movie description
+   - Make the layout visually appealing and easy to read
 
-3. - Add any finishing touches.
-Think something could be improved or changed? Feel free to get creative
+2. Booking Implementation
+   - Add a "Book Ticket" button in the bottom section
+   - When tapped, present the system calendar interface
+   - Create a calendar event that includes:
+     - The movie's title
+     - Correct start time and duration
+     - Movie description in the notes
+
+3. Any Finishing Touches
+   - If time permits, add any improvements you think make the app better!
+
+## Tips
+- Check Movie.swift for the available movie data Structure
