@@ -2,10 +2,11 @@
 
 ## Overview
 - CineCal is a simple movie booking application that displays a carousel of movies.
+- The list of movies is hardcoded in Movies.swift (No network calls required)
 - Your task is to complete the movie details view and booking functionality in `MoviePickerVC`.
 
 ## Project Structure
-- The app uses UIKit with a SwiftUI wrapper for the main view. (Gives you a live preview in ContentView)
+- The app uses UIKit with a SwiftUI wrapper for the main view. (Gives you a live preview in `ContentView`)
 - MoviePickerVC contains three main sections:
   1. Top: Movie carousel (already implemented)
   2. Middle: Movie details section (to be implemented)
@@ -34,4 +35,4 @@
    - If time permits, add any improvements you think make the app better!
 
 ## Tips
-- Check Movie.swift for the available movie data Structure
+- Check `Movie.swift` for the available movie data structure and access to demo data
